@@ -1,0 +1,70 @@
+Design redis cache system for distributed systems.
+
+Caching Best Practice: 
+    Validity-how long data wil be stored, other wise it will miss cache
+    High bit rate
+    TTL- time to live
+    Cache Miss
+
+Features / Eastimations
+    Terra byte
+    50k to 1million queries per second.
+    latency: about 1ms 
+    eviction policy: LRU.
+    100% availability.
+    Scalable
+
+Cache Action Patterns:
+    1. write through: when write request came will be written in cache and then DB.
+    2. write around: First main DB will be written, when cache miss happens first, then cache will be written.
+    3. write back: write update will be in cache and then ack will be sent imidiatly, there will be one service which will sync chach and DB.
+
+write and get operations should be fast.
+ we can use HASH table.
+ we need hashing function,
+ we need key and value.
+ we need buckets.
+ 
+ lets bucket imagine size is 10.
+    consider key = THOR and value=53 
+        53%10=3 we will be storing THOR in 3rd bucket.
+    Key= HULK and value=71
+        71%10=1 we will be storing HULK in 1st bucket.
+    Key= ANTMAN and value=93
+        93%10=3 here is the collision for 3rd bucket. this bucket is already has value.
+            in 3rd bucket we will build chanin using linked list.
+
+
+
+cache eviction policy/ removing the cached entry from the cache.
+    LRU (least recently used)
+    
+count frequency of key value access, much faster frequency. 
+we can use count min sketch,counting stream of data.
+
+we know we have ram.
+we know we have hash table,
+we have eviction policy.
+
+but how we are hoing to access the cache.
+
+we will have the service to perform action on cache when it recievs request.
+
+if we recieved much larger road we can not directly spawn the threads. it is a blocking call.
+
+we can use concurrent mechanism using event loop.
+every request will be kept in the queue, and even loop will be the long running thread, which monitors the thread availability and queue,
+once thread is available, event loop will handover the request to an thread.
+that way, request will be never blocked, thread will perform there operations concurrently.
+
+
+Fault tollerance / we have to persist data.
+
+    1. we will have service running in background, it will take dump of hashtable in regular interval.
+    2. other way, we will log key and value into the log file, we will have a buffer, which can eliminate frequent read write.
+
+Ensure Availability
+    If cache goes down, cache miss will occur and request will go to the DB. and read and write operations on DB will increase.
+
+    to fix this we can replicate server, using mirrored server, also read request can handled by mirrored server. latence will be efficient.
+    but synchronozation issue will be there. we can make the slaves. slaves will get request only when master is down, all oprations will be performed on the master only.

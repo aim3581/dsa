@@ -1,0 +1,32 @@
+Distributed systems.
+1. Datastore
+2. FileSystem
+3. Messaging
+4. Applications
+5. Ledgers.
+
+
+It is a group of machines which work to acomplish common goal. this are not super computers\
+
+we have a service which gets a request and convert word document to pdf.
+ in 1st month gets 1000 req/second => it was handling
+ 2nd month gets 10000 req/second  => frequencies
+ 3rd month gets 1lakh req/second => users are frustrated.  buy new RAM 128 GB
+ 4th month gets 1million req/second => buy new RAM 500GB
+
+ this is called Vertical scaling.
+
+other user has a same scenario
+    in 1st month gets 1000 req/second => it was handling
+    2nd month gets 10000 req/second  => frequencies
+    3rd month gets 1lakh req/second => users are frustrated.  disributed tasks to other server.
+    4th month gets 1million req/second => disributed tasks to 10 other machines which does same task.
+    on 10th month 1000 req/second=> no need to all machines running=> shutdown the other servers.
+This is called horizontal scaling/distributed system.
+    
+    Advantages:
+        1. Fault tollerance
+        2. low latency
+
+servers can be deployed to multiple regions, it will reduce the network delay
+e.g. if user  from india try to convert file request will be sent to Asia region server, instead of USA server.

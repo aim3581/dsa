@@ -1,0 +1,64 @@
+lock: used to lock creiticle section in mutiple threads in same process
+mutex: used to lock criticle section in mutiple processes threads. 
+semaphore: allow group of peoples to access to criticle sections. per host name we can allow few connections we can use semaphores to count 
+
+back in 1990 , we were using same machine, we were upgrading same machine.
+
+now a days there are distributed systems using horizontal scailing in multiple maschines/nodes.
+
+multiple nodes can run to perform same task in multiple regions.
+
+let's say there is an application which reads the data from log files and perform actions and saves output in the output files.
+
+if node1 and node2 are stared operations on a1.log, the 2 machines are processing same file, this is fine but we don't need to process same file.
+    both nodes will write to same file a1.out, there is high chances of data is getting corrupted in a1.out.
+
+there should be locking mechanism to put the lock on the file.
+    we can not simply put the lock directly, because lets say node1 put the lock, and node1 goes down, without releasing lock.
+    file will remain locked, this is single point of failure.
+
+we don't want to use single point of failure, we don't want to use db, tomany writes, if we use redis again if machine fails then same problem.
+we need to distribute this lock system as well, 
+    we should have a lock manager, one or machines and same data is getting replecated in multiple machines.
+    thier might be a chance the machines are placed in diffrent regions network delay will come into the picture.
+    it will take lot of time to sync data, there is no single source of truth, consistency issue.
+    may be machine will get down, before it sync the data. their is data loss in between.
+
+what properties of lock? 
+1. Mutex
+2. Deadlock free.
+3. Fault tollerance
+
+ initial design we have 
+ 1. Lock manager
+ 2. Cache
+
+ I1 and I2 instances trying to access criticle section.
+
+ first I1 request lock from lock manager, lockmanger add lock in the cache, and then gives lock back to the I1
+ for fault tollerance, lock manager will have TTL time to live for each lock.
+ if I1 goes down or taking to much time then release manager will release the lock.
+ thier might be a chance the process is taking time more than the TTL, then their might be a high chances of data corruption.
+
+ lock manger gives identifier to lock
+
+ 
+    ->   
+I1              Lock Manager      Lock_1 5sec
+    <-Lock_1
+
+
+    ->   
+I2              Lock Manager      Lock_2 5sec
+    <-Lock_2
+
+
+
+Zookeeper: to give unique id, other way generate random number with time-microsecnds
+
+we will have mutiple lock manager to reduce single point of failure.
+
+then I1 send lock request to all lock managers, lets say there are 5 lock managers unless untill 5 locks availbel I1 can not proceed.
+here also might be a chance I1 sends request to all 5 managers but one of the system gets down,
+
+to avoid this case then instead of all 5 we can check for (n/2)+1 machines. in this case I1 will need only 3 locks to procces

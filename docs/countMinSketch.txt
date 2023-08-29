@@ -1,0 +1,59 @@
+Count min Sketch, count the frequency of events on the streaming data.
+
+it uses multiple hash functions to map these frequencies to matrix.
+
+this algorithm is uses very less space, sometimes it counts more frequencies because of hash pollution.
+
+[A,B,C,D,E,F,G,H,I] ... infinite stream. in a day could be 1TB/day 30TB/month
+A-3
+B-2
+H-2
+I-2
+Limited space
+limited time
+stream only: we will never know where data gone, we don't store the data.
+
+lets learn using 
+    hashtable: some of liniar space its not sublinear space, time complexity is o(1) it can varry if collision.
+    Sampling: we can sample/random Sampling, we can get the frequencies, that is not useful algorithm.
+
+
+#Counting Sketch
+    it is noting but 2-dimentional array
+    number of rows = hash functions
+    more accurate result if use more hash functions.
+
+stream could have infinite number of data. [A,B,C,D,E,F,G,H,I]....OO
+
+    how to count frequencies using this mechanism.
+
+we will have rows as a hash function and columns as a values
+
+
+       function                      
+         H1          0   2   0   1   0   0   1
+         H2          0   0   2   0   1   0   1
+         H3          1   0   0   1   2   0   0
+         H4          2   0   0   0   0   0   2
+
+while caculating hash value for each function, columns will be Hash function and rows will be stream data.
+
+data    H1  H2  H3  H4
+A       1   6   3   1
+B       1   2   4   6       [2,2,2,2] 2 is the minimum count.
+C       3   4   1   6
+D       6   2   4   1
+E
+
+
+how will calculate the frequencies.
+
+again we will pass the data to all functions, and we get has values for each function.
+
+H1(A)=1
+H2(A)=6
+H3(A)=3
+H4(A)=1
+
+[2+1+1+2] we want minimum of those counts.
+minimum number in this is 1.

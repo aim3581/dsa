@@ -1,0 +1,66 @@
+what if RDBMS datastore is getting million request, write and read will become slow.
+we want to scale our store.
+    1. master slave architecture: read from slave, write on master
+        what is users does concurrently read write. CAP theorem, consistency will be an issue.
+    2. Sharding: by using sharding key we will create shards from master   
+        for e.g user id which start with A-I will be servef from shard1, similarly I-S from shard 2 and T-Z from shard 3
+        what if we want to join data, in that case we need to make network call to achieve this.
+
+CAP(consistency, Availability, Partitioning)
+
+  consistency:  in cluster there are 2 machines running.
+    user is trying to read the data from datastore, both are trying to write and read, whichever machine is reading it should read latest value.
+    this is called consistency.
+  availability: even one machine goes down still req can be served from other machine.
+
+  Partitioning: even if machines are connected you should able to read and write data.
+
+  not all 3 properties are possible in your datastore.
+
+  1. Highly available and consistant
+  2. Highly available and partial tollerance
+
+
+  Design datastore which is available and partial tollerance, consistency is not possible.
+
+    using master and slave, this will be Highly availabile, even though connection is desconnected we can get the data, partial tollerant. but consistency can not be ensured
+
+    Mysql is by default is CA like system, it can be configured to make CP system.
+
+    Instagram: we can sacrifice consistency, but high availability and partial tollerance is high priority.
+
+    Payment: we want consistency and availability
+
+SQL:    ACID (availability,consistency,Durability)
+NOSQL:  BASE (Basically availabile soft state eventual consistency)
+
+
+
+in disributed system, all nodes are running in cluster, each machine will have their on data and part of backup of other nodes, this is called partitioning.
+if one nodes down we have backup in one of the node.
+we can place nodes in diffrent locations.
+
+how we are going to rebalance the node in case of failure or scaling.
+how will system know where to write data.
+how we are going to ensure consistency.
+
+each node will have their primary data and secondary data or roles.
+consistant hashing, every node will have partitioning key. 
+
+has 1-1000 will be kept in node1 similarly, 1001-2000 in node2 , 2001 to 3000 in node3, 3001 to 4000 in node4.
+
+if hash value came out as 2500 this weill be handled by the node3 which has primary responsibilty.
+
+replication factor, lets say 3 then total number of copies of data needs on nodes, means on other 2 nodes will have the backup.
+
+what is rebalancing?
+if we want scale system. what if we wnt to add nodes to the cluster.
+every node will get there hashing value, and assigned there primary and secondary responsibilities.
+
+Gossip: there is gossip concept by which all nodes know each others responsibilities, whenever there is operation in one of the node by gossip other 2 nodes will know need to reshufle ranges.
+as soon as node  goes down, other nodes know using gossip, and they re shuffle their ranges
+
+this is not used only for nosql datastores.
+
+there are diffrent approaches, to handle this from them it is one of the example.
+

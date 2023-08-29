@@ -1,0 +1,123 @@
+Type of webcrawllers
+    Search engines
+    Copyright violation
+    Keyword based findings
+    Web malware detection
+    Web analytics
+    Datascience data
+
+Features 
+    Pollitness
+    DNS query
+    Distributed crawling
+    Priority Crawlling
+    Duplicate detection
+
+Scale
+    9000 million registed websites
+    lets say 60% are availabel = 500 million
+    100 average pages 
+    average size is 50Byts
+        120KB on an average
+    6PB -> 3PB total size
+
+Architecture goals
+    1. Scalability
+    2. Extensibility
+    3. Freshness of pages
+    4. Server side rendering.
+    5. Pollitness
+
+Pollitness: respect the upper limit of visit frequencies of websites.
+    crawllers consume resources on visited systems and often visit site without approval, Hence we need to be polite to the server.
+
+
+
+                                                                           DNS resolver
+                                        Seed URLs   ->    URL Frontier  \        |
+                                                                            Fetcher + rederer  <-> internet
+                                                                                \|/         \|/
+                                        URL extractor                      <-  Redis      Storage
+    URL Loader      <- URL filter -> \->/                       queue
+    is crawlled?                         Duplicate detection
+
+
+
+Seed URLs/Initiater urls
+    any urls to crawl we need to provide urls to crawl, this is seed urls.
+
+URL Frontier:
+    pass seed urls to frontier, when we want to crawl next url frontier is the on who is provider.
+
+Fetcher and Renderes:
+    these implimented using therads or sync IOs for concurrency. we can scale these in distributed systems.
+    here is all things are happening, whenever is thered is free frontier provides new url.
+    fetcher communicates with DNS resolver, there are mutiple factor in the DNS resolver, we can build our custom dns resolver.
+    most of the os has synchronous way for dns resolution, fetcher gets the IP address using that it fetches from internet.
+    there are many ways to render, now a days there is server side rendering, 
+    one more thing fetcher should do configure user agent.
+    once it fetch the data we should cache it, and store it in that data store.
+
+    in final steps fetcher should write message/response into the queue
+
+URL extractor:
+    we will find lot of websites witch will be pointing to diffrent URl or it will be pointing to same webSites.
+
+Duplicate detection:
+    we don't want to extractn information from already extracted one.
+
+URL Filter:
+    we get set of uniuqe urls which will be passed to the URL filter,
+    it checks for extensions, and whatever we needed keep those only.
+    only essential urls are passed to URL loader.
+
+URL Loader:
+    it might be a chance, URL is alreadt crawled.
+    we can use Bllom filter to check is that url crawled, if crawled skip it.
+
+
+
+                queue                               queue               Heap
+                queue                               queue                |
+Frontier        queue   ->  Back Queue Router ->    queue       ->  Back queue selector ->       Fetcher/render
+                queue                               queue
+                queue                               queue
+
+
+Back queue router:
+    ensure none of the back queue is empty
+    number of  queue = number of threads
+    will consot higher priority queue and lower priority queue.
+    Back queue routers jobs is to check frontier priority queues.
+
+Back Queues:
+    back queue ensures the Pollitness
+    
+Back queue Selector:
+    goes to heap and check which urls needs to be selected
+    heap contains the minimum times of urls and linked back queues
+    then slector selects the queues which has minimum time url
+    to impliment politness we are doing this using minimum time, somtimes might happen that there is no url to select
+    we don't need to give delay, 
+
+Detect Updates:
+    Do we need to fetch whole page,  
+    we can do head request and check last modified time and last crawled modified time 
+
+Detect duplicates:
+    to check is URL is legitamate or not,
+    might be a chance some copied the page
+    we can add some hashing mechanism and stire into the database, if same hash we can say it is duplicate.
+    but what if some one copied only the some content not whole websites, near duplicate search, probability matching.
+    google uses simhash algorithm. if 80% of content is same then it says near duplicate,
+
+
+#Storage:
+where do we want to store the data?
+data/images might be in a MBs
+
+google uses BigTable/gfs.
+HDFS(Haddop distributed file system) only adviced to use only 68MB -> not helpful for lower file size
+HDFS- federation
+
+we may have 
