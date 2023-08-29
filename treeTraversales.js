@@ -120,15 +120,11 @@ class BST {
 		return this.findDistance(root.right, node, distance + 1);
 	}
 
-	findDistanceBetweenNodes(root, node, distance = 0) {
-		if (root == null || root.key === node) {
-			return distance;
-		}
-
-		if (node < root.key) {
-			return this.findDistance(root.left, node, distance + 1);
-		}
-		return this.findDistance(root.right, node, distance + 1);
+	findDistanceBetweenNodes(nodeA, nodeB) {
+		const lca = this.findLCA(this.root, nodeA, nodeB);
+		const distanceA = this.findDistance(lca, nodeA);
+		const distanceB = this.findDistance(lca, nodeB);
+		return distanceA + distanceB;
 	}
 }
 
@@ -161,4 +157,6 @@ console.log("----------------------------------------");
 const n = tree.findLCA(tree.root, 13, 15);
 console.log("LCA: ", n.key);
 console.log("----------------------------------------");
-console.log(tree.findDistance(tree.root, 8));
+console.log(tree.findDistance(tree.root, 15));
+console.log("----------------------------------------");
+console.log(tree.findDistanceBetweenNodes(7, 15));
