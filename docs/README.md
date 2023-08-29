@@ -23,9 +23,9 @@ o/p:     {{13, 9, 5, 1},
 
 #Solution: 
 Maintain hashmap and insert the sum till now for every element and its index position –> HashMap 
-For each element, check the following 3 cases: 
-a) whether the element is “zero” ==> start and end indices both are “current index” 
-b) whether the sum is “zero” ==> start index is 0 and end index is “current index” 
+For each element, check the following 3 cases: \n
+a) whether the element is “zero” ==> start and end indices both are “current index” \n
+b) whether the sum is “zero” ==> start index is 0 and end index is “current index” \n
 c) whether the sum is already present ==> start index is “map.get(sum)+1”, end index is “current index” 
 
 #II. Technical Round 1: 
