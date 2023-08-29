@@ -1,136 +1,5 @@
 # Practice
 
-#Technical Round 1: 
-Check your Problem-Solving Skills Ask Questions on Data Structure and Algorithms Medium -Hard Level Questions.
-
-#Technical Round 2: 
-Discussion on Projects in which technologies are used in detail, Computer Science Concepts and Talk about New technologies, etc.
-
-Design: Questions ask on Low-Level Design and High-Level Design Questions in depth.
-
-#HR:
-
-Did you ever have a conflict with your current/previous boss or professor?
-I am not going to say conflict as such but we had difference of opinion over one issue.
-Do you have any serious medical issues?
-No.
-How do you respond to change?
-
-Do you have a good work ethic?
-
-#Questions asked on Salesforce:
-
-Program to insert an element at the Bottom of a Stack
-Lowest Common Ancestor in a Binary Tree
-Delete Nth node from the end of the given linked list
-Longest valid Parentheses
-Connect n ropes with minimum cost
-
-https://www.geeksforgeeks.org/sde-sheet-a-complete-guide-for-sde-preparation/
-
-#Operating System
-An operating system acts as an intermediary between the user of a computer and computer hardware. The purpose of an operating system is to provide an environment in which a user can execute programs conveniently and efficiently.
-Below links contains complete Operating System Study Material:
-Commonly Asked Operating Systems Interview Questions
-Last Minute Notes (LMNs) | Operating Systems
-Complete Tutorial on Operating System
- 
-
-#DBMS
-Database is a collection of inter-related data which helps in efficient retrieval, insertion and deletion of data from database and organizes the data in the form of tables, Links, schemas, reports etc.
-Below Links contains complete DBMS study Material:
-Commonly Asked DBMS Interview Questions
-Commonly Asked DBMS Interview Questions | Set-2
-Last Minute Notes (LMNs) | DBMS
-Complete Tutorial on DBMS
- 
-
-#SQL
-SQL stands for Structured Query Language. It is a language used to interact with the database, i.e to create a database, to create a table in the database, to retrieve data or update a table in the database.
-Below Links contains complete SQL study Material:
-SQL Interview Questions
-SQL Interview Questions | Set-2
-SQL Interview Questions | Set-3
-Complete Tutorial on SQL
- 
-
-#Computer Networks
-A computer network is a system that connects numerous independent computers in order to share information (data) and resources. The integration of computers and other different devices allows users to communicate more easily.
-Below Links contains complete Computer Networks study Material:
-Commonly Asked Computer Networks Interview Questions
-Last Minute Notes (LMNs) | Computer Networks
-Complete Tutorial on Computer Networks
- 
-
-#Puzzles
-Puzzles are one of the ways to check your problem-solving skills. These are tricky questions that let you think logically.
-Try to solve these 20 most popular puzzles asked in Interviews
- 
-#Projects
-Thoroughly revise all the work you have done till now in your projects. The grilling about projects can sometimes be very deep. Also, choose your words before you speak. Mention only those topics where you think you are fine to be grilled upon.
-If you haven’t made a project then take an idea from GFG Projects and start working on it.
- 
-#System Design
-System Design is the process of designing the architecture, components, and interfaces for a system so that it meets the end-user requirements. System Design for tech interviews is something that can’t be ignored!
-Almost every IT giant whether it be Facebook, Amazon, Google, or any other ask various questions based on System Design concepts such as scalability, load-balancing, caching, etc. in the interview.
-This specifically designed System Design tutorial will help you to learn and master System Design concepts in the most efficient way from basics to advanced level.
-
-Note: We will start uploading videos soon
-
-#**Salesforce Interview Experience | Set 5 (On-Campus)**
-
-#Online Test
-
-Hosted on Hackerrank. It consisted of 2 coding questions-
-
-Check if parenthesis is balanced. All types of parenthesis can be present (, {, [, ], }, )
-If a = 1, b = 2, …, z = 26, calculate number of ways to decode an integer to a character string.
-Eg. 1243 can be decoded in 3 ways
-
-
-#Interview – 1
-
-Tell me something about yourself
-My favorite Data Structure and Why. Also, he asked me the toughest problem I had ever solved in the domain of Computer Science.
-Implement Stack using two Queues. How would you. Scale this in a multithreaded environment when multiple threads are trying to access the same stack?
-Left view of a Binary tree
-What is the basic principle of Dynamic Programming?
-Number of ways to climb a staircase of N steps if at a time the person can take 1, 2 or 3 steps.
-
-
-#Interview – 2
-
-Egg breaking puzzle – Suppose that we wish to know which floors in a 100-storey building are safe to drop eggs from, and which will cause the eggs to break on landing. What strategy should be used to drop eggs such that total number of drops in worst case is minimized and we find the required floor.
-Iterative inorder traversal in a Binary tree
-Find Longest root to leaf path in a tree
-Implement Blocking Queue in a multithreaded environment using Semaphore.
-
- #Interview – 3
-
-He asked me my favorite CS subject.
-On a scale of 1-10, how would you rate yourself in DS-Algorithms and DBMS.
-Given the following table regarding marks of students in a college in a semester in various subjects: (Roll number, Stream, Subject, Marks). Write a SQL query to find the top 3 rankers of each department.
-Interviewer described a game scenario which consisted of a Cartesian plane and there are steps fixed at particular coordinates. The player enters from the top left point and can jump from a point to an adjacent point if there is a step there and the distance to jump is not more than one unit. Destination point is bottom right corner. Find the minimum number of steps the player needs to go from source to destination.
-Internal implementation of Hashmap and collision handling.
-What are indices in SQL? Why are they used? How indices work?
-(Key, Value) entries are stored in a File on a disk. A read operation reads a value, given a particular key. How can the read operation be made more efficient. I found the question a little ambiguous and asked for a head start. He told me to think in terms of File System (Distributed File System using blocks)
-
-
-#**Salesforce Interview Experience | Set 6 (Off-Campus for Associate Member of Technical )**
-
-
-#Round 2 (Technical Interview): 
-In this round interviewer first asked me the question on stock price (https://practice.geeksforgeeks.org/problems/stock-buy-and-sell/0 ). I told the interviewer that I had seen this problem and told them about the solution in and other modifications of this problem and general Dynamic Programming Approach for at most K transactions. The interviewer then asked me a question on dependency resolution order. Asked me to code it and run test cases. Then I told the interviewer that in case of cyclic dependencies solution won’t work and then told what we can to do for cyclic dependency case.
-
-#Round 3 (Technical Interview): 
-After a brief introduction about him, he asked me to introduce myself. He then moved forward to the coding problem. The problem was to match a given string with a given regular expression with “*”  and “.” in it, where “a*” means zero or more than one occurrence of a, and “.” means single occurrence of any character (Note: “.*” is also a valid expression) PS: This problem is a slight modification of standard interview problem that has been asked in Facebook and Microsoft. It has more cases than the standard one. He first asked me to write all possible test cases for the problem. Then he asked me to write a fully functional code and then we tested it against the all possible cases. He then asked me design concepts about Abstraction Encapsulation and Polymorphism, there differences and since I mentioned my favourite programming language is Python he asked me whether Python supports these or not.
-
-#Round 4 (Hiring Manager round): 
-This interview round was with my Hiring manager. He didn’t ask me any technical questions. He asked me about my past intern experiences. He asked me situational questions what will I do. I gave good thoughtful answers he was quite impressed with my thinking in those matters. He was also impressed with the kind of questions that I asked him about the culture, work etc. I even asked cross-questions on the tech stack they were using. He asked me to justify the tech stack with possible reasons for using it, which I did so.
-
-#Round 5 (Anchor round): 
-This round was with one of the senior directors of the engineering team in Salesforce HQ. He asked me questions on my resume and behavioural questions like where do you see yourself in 3-5 years. Upon my answer to this, he asked me what skills do I think would be most important to in achieving what I just said. He was also impressed with my thoughtful answers and told me some story about a great AMTS hire in Seattle.
-
 
 
 #**Salesforce Interview Experience | Set 1 (For SDE-1)**
@@ -895,3 +764,135 @@ And a few more ….
 Finally, 3 were selected, and I was one of them…
 
 Tips: Be patient even if you don’t get the question for the first time and keep asking questions and any hint if you need it. The interviewers were helpful enough.
+
+#Technical Round 1: 
+Check your Problem-Solving Skills Ask Questions on Data Structure and Algorithms Medium -Hard Level Questions.
+
+#Technical Round 2: 
+Discussion on Projects in which technologies are used in detail, Computer Science Concepts and Talk about New technologies, etc.
+
+Design: Questions ask on Low-Level Design and High-Level Design Questions in depth.
+
+#HR:
+
+Did you ever have a conflict with your current/previous boss or professor?
+I am not going to say conflict as such but we had difference of opinion over one issue.
+Do you have any serious medical issues?
+No.
+How do you respond to change?
+
+Do you have a good work ethic?
+
+#Questions asked on Salesforce:
+
+Program to insert an element at the Bottom of a Stack
+Lowest Common Ancestor in a Binary Tree
+Delete Nth node from the end of the given linked list
+Longest valid Parentheses
+Connect n ropes with minimum cost
+
+https://www.geeksforgeeks.org/sde-sheet-a-complete-guide-for-sde-preparation/
+
+#Operating System
+An operating system acts as an intermediary between the user of a computer and computer hardware. The purpose of an operating system is to provide an environment in which a user can execute programs conveniently and efficiently.
+Below links contains complete Operating System Study Material:
+Commonly Asked Operating Systems Interview Questions
+Last Minute Notes (LMNs) | Operating Systems
+Complete Tutorial on Operating System
+ 
+
+#DBMS
+Database is a collection of inter-related data which helps in efficient retrieval, insertion and deletion of data from database and organizes the data in the form of tables, Links, schemas, reports etc.
+Below Links contains complete DBMS study Material:
+Commonly Asked DBMS Interview Questions
+Commonly Asked DBMS Interview Questions | Set-2
+Last Minute Notes (LMNs) | DBMS
+Complete Tutorial on DBMS
+ 
+
+#SQL
+SQL stands for Structured Query Language. It is a language used to interact with the database, i.e to create a database, to create a table in the database, to retrieve data or update a table in the database.
+Below Links contains complete SQL study Material:
+SQL Interview Questions
+SQL Interview Questions | Set-2
+SQL Interview Questions | Set-3
+Complete Tutorial on SQL
+ 
+
+#Computer Networks
+A computer network is a system that connects numerous independent computers in order to share information (data) and resources. The integration of computers and other different devices allows users to communicate more easily.
+Below Links contains complete Computer Networks study Material:
+Commonly Asked Computer Networks Interview Questions
+Last Minute Notes (LMNs) | Computer Networks
+Complete Tutorial on Computer Networks
+ 
+
+#Puzzles
+Puzzles are one of the ways to check your problem-solving skills. These are tricky questions that let you think logically.
+Try to solve these 20 most popular puzzles asked in Interviews
+ 
+#Projects
+Thoroughly revise all the work you have done till now in your projects. The grilling about projects can sometimes be very deep. Also, choose your words before you speak. Mention only those topics where you think you are fine to be grilled upon.
+If you haven’t made a project then take an idea from GFG Projects and start working on it.
+ 
+#System Design
+System Design is the process of designing the architecture, components, and interfaces for a system so that it meets the end-user requirements. System Design for tech interviews is something that can’t be ignored!
+Almost every IT giant whether it be Facebook, Amazon, Google, or any other ask various questions based on System Design concepts such as scalability, load-balancing, caching, etc. in the interview.
+This specifically designed System Design tutorial will help you to learn and master System Design concepts in the most efficient way from basics to advanced level.
+
+Note: We will start uploading videos soon
+
+#**Salesforce Interview Experience | Set 5 (On-Campus)**
+
+#Online Test
+
+Hosted on Hackerrank. It consisted of 2 coding questions-
+
+Check if parenthesis is balanced. All types of parenthesis can be present (, {, [, ], }, )
+If a = 1, b = 2, …, z = 26, calculate number of ways to decode an integer to a character string.
+Eg. 1243 can be decoded in 3 ways
+
+
+#Interview – 1
+
+Tell me something about yourself
+My favorite Data Structure and Why. Also, he asked me the toughest problem I had ever solved in the domain of Computer Science.
+Implement Stack using two Queues. How would you. Scale this in a multithreaded environment when multiple threads are trying to access the same stack?
+Left view of a Binary tree
+What is the basic principle of Dynamic Programming?
+Number of ways to climb a staircase of N steps if at a time the person can take 1, 2 or 3 steps.
+
+
+#Interview – 2
+
+Egg breaking puzzle – Suppose that we wish to know which floors in a 100-storey building are safe to drop eggs from, and which will cause the eggs to break on landing. What strategy should be used to drop eggs such that total number of drops in worst case is minimized and we find the required floor.
+Iterative inorder traversal in a Binary tree
+Find Longest root to leaf path in a tree
+Implement Blocking Queue in a multithreaded environment using Semaphore.
+
+ #Interview – 3
+
+He asked me my favorite CS subject.
+On a scale of 1-10, how would you rate yourself in DS-Algorithms and DBMS.
+Given the following table regarding marks of students in a college in a semester in various subjects: (Roll number, Stream, Subject, Marks). Write a SQL query to find the top 3 rankers of each department.
+Interviewer described a game scenario which consisted of a Cartesian plane and there are steps fixed at particular coordinates. The player enters from the top left point and can jump from a point to an adjacent point if there is a step there and the distance to jump is not more than one unit. Destination point is bottom right corner. Find the minimum number of steps the player needs to go from source to destination.
+Internal implementation of Hashmap and collision handling.
+What are indices in SQL? Why are they used? How indices work?
+(Key, Value) entries are stored in a File on a disk. A read operation reads a value, given a particular key. How can the read operation be made more efficient. I found the question a little ambiguous and asked for a head start. He told me to think in terms of File System (Distributed File System using blocks)
+
+
+#**Salesforce Interview Experience | Set 6 (Off-Campus for Associate Member of Technical )**
+
+
+#Round 2 (Technical Interview): 
+In this round interviewer first asked me the question on stock price (https://practice.geeksforgeeks.org/problems/stock-buy-and-sell/0 ). I told the interviewer that I had seen this problem and told them about the solution in and other modifications of this problem and general Dynamic Programming Approach for at most K transactions. The interviewer then asked me a question on dependency resolution order. Asked me to code it and run test cases. Then I told the interviewer that in case of cyclic dependencies solution won’t work and then told what we can to do for cyclic dependency case.
+
+#Round 3 (Technical Interview): 
+After a brief introduction about him, he asked me to introduce myself. He then moved forward to the coding problem. The problem was to match a given string with a given regular expression with “*”  and “.” in it, where “a*” means zero or more than one occurrence of a, and “.” means single occurrence of any character (Note: “.*” is also a valid expression) PS: This problem is a slight modification of standard interview problem that has been asked in Facebook and Microsoft. It has more cases than the standard one. He first asked me to write all possible test cases for the problem. Then he asked me to write a fully functional code and then we tested it against the all possible cases. He then asked me design concepts about Abstraction Encapsulation and Polymorphism, there differences and since I mentioned my favourite programming language is Python he asked me whether Python supports these or not.
+
+#Round 4 (Hiring Manager round): 
+This interview round was with my Hiring manager. He didn’t ask me any technical questions. He asked me about my past intern experiences. He asked me situational questions what will I do. I gave good thoughtful answers he was quite impressed with my thinking in those matters. He was also impressed with the kind of questions that I asked him about the culture, work etc. I even asked cross-questions on the tech stack they were using. He asked me to justify the tech stack with possible reasons for using it, which I did so.
+
+#Round 5 (Anchor round): 
+This round was with one of the senior directors of the engineering team in Salesforce HQ. He asked me questions on my resume and behavioural questions like where do you see yourself in 3-5 years. Upon my answer to this, he asked me what skills do I think would be most important to in achieving what I just said. He was also impressed with my thoughtful answers and told me some story about a great AMTS hire in Seattle.
+
