@@ -10,10 +10,12 @@ class Node {
 class BST {
 	constructor() {
 		this.root = null;
+		this.size = 0;
 	}
 
 	insert(val) {
 		const node = new Node(val);
+		this.size++;
 		if (!this.root) {
 			this.root = node;
 			return;
@@ -69,6 +71,10 @@ class BST {
 		const queue = [];
 		if (this.root == null) return;
 		queue.push(this.root);
+		let l = 1;
+		const widths = {};
+		widths[1] = queue.length;
+		let count = 1;
 		while (queue.length !== 0) {
 			const node = queue.shift();
 			console.log(node.key);
@@ -78,7 +84,15 @@ class BST {
 			if (node.right !== null) {
 				queue.push(node.right);
 			}
+			count--;
+			if (count == 0 && queue.length) {
+				l++;
+				widths[l] = queue.length;
+				count = queue.length;
+			}
 		}
+		console.log(widths);
+		return widths;
 	}
 
 	// used post order DFS traversal  to find lowest common ancestor
@@ -126,6 +140,29 @@ class BST {
 		const distanceB = this.findDistance(lca, nodeB);
 		return distanceA + distanceB;
 	}
+
+	height(node) {
+		if (node === null) {
+			return 0;
+		}
+
+		return 1 + Math.max(this.height(node.left), this.height(node.right));
+	}
+
+	depth(node, x = "") {
+		if (node === null) {
+			return -1;
+		}
+		let d = -1;
+		if (
+			node.key == x ||
+			(d = this.depth(node.left, x)) >= 0 ||
+			(d = this.depth(node.right, x)) >= 0
+		)
+			return d + 1;
+
+		return d;
+	}
 }
 
 const tree = new BST();
@@ -142,21 +179,25 @@ tree.insert(17);
 tree.insert(16);
 tree.insert(15);
 
-console.log(JSON.stringify(tree));
-console.log("----------------------------------------");
-tree.inorderDFS(tree.root);
-console.log("----------------------------------------");
-tree.preOrderDFS(tree.root);
-console.log("----------------------------------------");
-tree.postOrderDFS(tree.root);
-console.log("----------------------------------------");
+// console.log(JSON.stringify(tree));
+// console.log("----------------------------------------");
+// tree.inorderDFS(tree.root);
+// console.log("----------------------------------------");
+// tree.preOrderDFS(tree.root);
+// console.log("----------------------------------------");
+// tree.postOrderDFS(tree.root);
+// console.log("----------------------------------------");
 
 tree.levelOrderBFS();
-console.log("----------------------------------------");
+// console.log("----------------------------------------");
 
-const n = tree.findLCA(tree.root, 13, 15);
-console.log("LCA: ", n.key);
-console.log("----------------------------------------");
-console.log(tree.findDistance(tree.root, 15));
-console.log("----------------------------------------");
-console.log(tree.findDistanceBetweenNodes(7, 15));
+// const n = tree.findLCA(tree.root, 13, 15);
+// console.log("LCA: ", n.key);
+// console.log("----------------------------------------");
+// console.log(tree.findDistance(tree.root, 15));
+// console.log("----------------------------------------");
+// console.log(tree.findDistanceBetweenNodes(7, 15));
+
+// console.log("Height : ", tree.height(tree.root));
+
+// console.log("depth : ", tree.depth(tree.root, 8));
