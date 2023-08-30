@@ -78,10 +78,10 @@ function findPath(matrix, r, i, visited = {}) {
 */
 
 const matrix = [
-	[1, 0, 0, 0],
-	[1, 1, 0, 0],
-	[1, 1, 0, 0],
-	[0, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 0, 1, 0],
+	[1, 1, 1, 0],
+	[0, 0, 1, 1],
 ];
 const result = findPath(matrix, 0, 0);
 console.log(count, result);
