@@ -1,4 +1,17 @@
+/*
+Interviewer described a game scenario which consisted of a Cartesian plane and there are steps fixed at particular coordinates. 
+The player enters from the top left point and can jump from a point to an adjacent point if there is a step there and 
+the distance to jump is not more than one unit. 
+Destination point is bottom right corner. 
+Find the minimum number of steps the player needs to go from source to destination.
+
+
+Will rat find the hole in maze
+
+*/
+
 let count = 0;
+
 function findPath(matrix, r, i, visited = {}) {
 	//recieved matrix
 	// need to check adjuscent elements has 1 value or not
