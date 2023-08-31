@@ -15,6 +15,32 @@ function countWaysToClimbStairs(n) {
   
     return dp[n];
   }
+
+  function climb(totalSteps,stepNum,count){
+
+    if(stepNum===totalSteps){
+      return count +1;
+    }
+
+    if(totalSteps-stepNum >=1){
+      count= climb(totalSteps,stepNum+1,count);
+    }
+
+    if(totalSteps-stepNum >=2){
+      count= climb(totalSteps,stepNum+2,count);
+    }
+    if(totalSteps-stepNum >=3){
+      count= climb(totalSteps,stepNum+3,count);
+    }
+return count
+  }
+
+  function countWaysRecursivly(n){
+    let count =0;
+
+    count =climb(n,0,count);
+    return count;
+  }
   
   const n = 4; // Number of steps
   const ways = countWaysToClimbStairs(n);
