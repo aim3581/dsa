@@ -247,9 +247,11 @@ This round was with one of the senior directors of the engineering team in Sales
 #Online Test
 It was a 1 hour long test conducted on HackerRank. The test consisted of 2 coding questions and 10 or 12 MCQs. The MCQs were of moderate difficulty and were related to DS, algorithms, DBMS, OS etc. The coding questions were ACODE and Optimal Strategy for a Game. The points scheme was 1/-0.25 for MCQs and the coding questions had 4 test cases each with each test case carrying 2.5 points.
 11 students were shortlisted for further rounds.
-F2F Technical interview
+
+#F2F Technical interview
 The first round went on for about 45-50 minutes. The interviewer kept a poker face the entire time. He gave me some simple coding questions which could be solved using dynamic programming, I answered the questions. Then we had a discussion about the projects I had mentioned in my resume. After the discussion, he asked me to design a file system. I didn’s understand what was he expecting me to write on the paper. I clarified and then he told me to come up with some classes. After more clarifications and some time I wrote classes for directory and files. Then he asked me to improve it as it contained a lot of duplication. I then did some sort of optimization. This round was mixed and I didn’t expect to get a call for further rounds.
-F2F Technical interview
+
+#F2F Technical interview
 Out of 11 only 4 were shortlisted for 2nd round of interview.I was one of the lucky few. The interviewer gave me a thread synchronization problem. The problem stated that 2 thread are present, one thread prints even numbers and the other prints odd numbers. The threads should print the numbers in order as 1, 2, 3, 4, 5….. I came up with some approach, and he didn’t seem satisfied with my approach. Then he asked me about Node.js, as it was mentioned in my resume. We then discussed about differences of JS+Node and PHP+Apache. The interview lasted only 30 minutes.
 
 
