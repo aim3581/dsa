@@ -50,6 +50,25 @@ class BST {
 		this.inorderDFS(node.right);
 	}
 
+	 inorderTraversalStack(root) {
+		const stack = [];
+	
+		let current = root;
+	
+		while (current || stack.length > 0) {
+			while (current) {
+				stack.push(current);
+				current = current.left;
+			}
+	
+			current = stack.pop();
+			console.log(current.key)
+	
+			current = current.right;
+		}
+	
+	};
+
 	preOrderDFS(node) {
 		if (node == null) {
 			return;
@@ -59,6 +78,22 @@ class BST {
 		this.preOrderDFS(node.right);
 	}
 
+	preOrderStack(root){
+		const stack = [];
+		if(!root) return
+		stack.push(root);
+		while( stack.length){
+			const current = stack.pop();
+			console.log(current.key);
+			if(current.right){
+				stack.push(current.right);
+			}
+			if (current.left) {
+				stack.push(current.left)
+			}
+		}
+	}
+
 	postOrderDFS(node) {
 		if (node == null) {
 			return;
@@ -66,6 +101,30 @@ class BST {
 		this.postOrderDFS(node.left);
 		this.postOrderDFS(node.right);
 		console.log(node.key + " ");
+	}
+
+	postOrderStack(root){
+		const stack1 = [];
+		const stack2=[];
+		if(!root)return;
+		stack1.push(root);
+		while (stack1.length > 0) {
+			// pop from stack1 and add it on stack 2
+			const current = stack1.pop();
+			stack2.push(current)
+			// put left on stasck 1
+			if(current.left){
+				stack1.push(current.left)
+			}
+			// pysh right on stack 1
+			if(current.right){
+				stack1.push(current.right)
+			}
+		}
+
+		while (stack2.length) {
+			console.log(stack2.pop().key)
+		}
 	}
 
 	levelOrderBFS() {
@@ -208,10 +267,10 @@ tree.insert(15);
 // console.log("----------------------------------------");
 // tree.inorderDFS(tree.root);
 // console.log("----------------------------------------");
-// tree.preOrderDFS(tree.root);
+//  tree.preOrderDFS(tree.root);
 // console.log("----------------------------------------");
-// tree.postOrderDFS(tree.root);
-// console.log("----------------------------------------");
+tree.postOrderDFS(tree.root);
+console.log("----------------------------------------");
 
 // tree.levelOrderBFS();
 // console.log("----------------------------------------");
@@ -229,5 +288,7 @@ tree.insert(15);
 
 // const result= tree.findKthElement(tree.root,3)
 // console.log(result);
+
+tree.postOrderStack(tree.root)
 
 exports.BST=BST;

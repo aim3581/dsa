@@ -9,7 +9,7 @@ class Graph {
 		this.adjList.set(v, []);
 	}
 
-	addEdge(source, destination) {
+	addEdge(source, destination,wight=0) {
 		if (!this.adjList.has(source)) {
 			this.addVertex(source);
 		}
@@ -18,17 +18,17 @@ class Graph {
 			this.addVertex(destination);
 		}
 
-		this.adjList.get(source).push(destination);
+		this.adjList.get(source).push([destination,wight]);
 		if (!this.directed) {
-			this.adjList.get(destination).push(source);
+			this.adjList.get(destination).push([source,wight]);
 		}
 	}
 
 	removeEdge(s, d) {
-		let list = this.adjList.get(s).filter((v) => v !== d);
+		let list = this.adjList.get(s).filter(([v,w]) => v !== d);
 		this.adjList.set(s, list);
 		if (!this.directed) {
-			let list = this.adjList.get(d).filter((v) => v !== s);
+			let list = this.adjList.get(d).filter(([v,w]) => v !== s);
 			this.adjList.set(d, list);
 		}
 	}
@@ -47,7 +47,7 @@ class Graph {
 		for (const key of keys) {
 			const list = this.adjList.get(key);
 			let str = "";
-			for (const val of list) {
+			for (const [val,wight] of list) {
 				str = str + val + " ";
 			}
 			console.log(key + " -> " + str);
