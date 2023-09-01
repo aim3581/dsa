@@ -11,6 +11,7 @@ class BST {
 	constructor() {
 		this.root = null;
 		this.size = 0;
+		this.count=0;
 	}
 
 	insert(val) {
@@ -163,6 +164,30 @@ class BST {
 
 		return d;
 	}
+
+	findKthElement(node,k) {
+		if (node == null) {
+			return null;
+		}
+		
+
+		const left = this.findKthElement(node.left,k);
+
+		if(left !=null){
+			return left
+		}
+
+		this.count++
+		if(k==this.count){
+			return node.key
+		}
+		return this.findKthElement(node.right,k);
+	}
+
+	findKthEle(k) {
+		this.count = 0;
+		return this.findKthElement(this.root,k)
+	}
 }
 
 const tree = new BST();
@@ -188,7 +213,7 @@ tree.insert(15);
 // tree.postOrderDFS(tree.root);
 // console.log("----------------------------------------");
 
-tree.levelOrderBFS();
+// tree.levelOrderBFS();
 // console.log("----------------------------------------");
 
 // const n = tree.findLCA(tree.root, 13, 15);
@@ -201,3 +226,8 @@ tree.levelOrderBFS();
 // console.log("Height : ", tree.height(tree.root));
 
 // console.log("depth : ", tree.depth(tree.root, 8));
+
+// const result= tree.findKthElement(tree.root,3)
+// console.log(result);
+
+exports.BST=BST;
