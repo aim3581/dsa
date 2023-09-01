@@ -112,11 +112,11 @@ class BST {
 			// pop from stack1 and add it on stack 2
 			const current = stack1.pop();
 			stack2.push(current)
-			// put left on stasck 1
+			// push left on stasck 1
 			if(current.left){
 				stack1.push(current.left)
 			}
-			// pysh right on stack 1
+			// push right on stack 1
 			if(current.right){
 				stack1.push(current.right)
 			}
@@ -124,7 +124,7 @@ class BST {
 
 		while (stack2.length) {
 			console.log(stack2.pop().key)
-		}
+		}		
 	}
 
 	levelOrderBFS() {
