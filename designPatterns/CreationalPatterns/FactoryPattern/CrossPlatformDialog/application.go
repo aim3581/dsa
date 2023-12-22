@@ -4,9 +4,12 @@ type Application struct {
 	dialog Dialog
 }
 
-func CreateApplication(mode string) *Application {
+// The application picks a creator's type depending on the
+// current configuration or environment settings.
+
+func CreateApplication(mode *string) *Application {
 	app := new(Application)
-	switch mode {
+	switch *mode {
 	case "Windows":
 		app.dialog = new(WindowDialog)
 	case "Web":
