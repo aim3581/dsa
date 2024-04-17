@@ -12,7 +12,9 @@ func main() {
 	// fmt.Println(head)
 	// head = linkedList.ReverseBetween(head, 2, 4)
 	// fmt.Println(head)
-	t1 := tree.New(50)
-	t2 := tree.New(50)
+	t1 := tree.New(10)
+	t2 := tree.New(5)
+	fmt.Println(t1)
+	fmt.Println(t2)
 	fmt.Println(tree.Same(t1, t2))
 }
