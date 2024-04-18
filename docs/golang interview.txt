@@ -1,0 +1,544 @@
+
+1. Does Golang have exceptions?
+		No. Golang doesn’t have exceptions. Error values are used to indicate the abnormal states in Golang.
+
+2. Does Go support optional parameters?
+		Go doesn’t support any optional parameters. Also, it doesn’t support method overloading.
+		
+3. Does Go support Object oriented concepts?
+		Some part of it like Polymorphism.
+		
+3. What is Polymorphism in Go?
+		It provides embedding, composition, and interfaces to support polymorphism property and allows code reuse.
+		Does Golang support inheritance?
+
+4. Compare buffered and unbuffered channels in Golang. 
+		Buffered channels make asynchronous communication. Goroutines are not used to send and receive operations.
+		On the other hand, unbuffered channels support synchronous communication. We can use these channels for sending as well as receiving data.
+
+5. Does Golang supports Closure?
+
+6. Do you know  Rune data type in Go?
+		A Rune is also called a Codepoint. It is an integer type that alias for the int32 type. The Rune represents a single Unicode character. Rune literals can be represented by enclosing in single quotes.
+
+7. How does Go achieve concurrency?
+
+8. Describe the scope rules in Go
+
+9. How does Go handle memory management?
+
+10. Garbage Collection in Go and Golang
+		The GC runs concurrently with mutator threads, is type accurate (aka precise), allows multiple. GC thread to run in parallel.
+		It is a concurrent mark and sweep that uses a write barrier. It is non-generational and non-compacting.
+		Allocation is done using size segregated per P allocation areas to minimize fragmentation while eliminating locks in the common case.
+
+
+11. What is SudoG struct in Golang? how it is getting used?
+		type sudog struct{
+		   g *g
+		   isSelect bool
+		   next *sudog
+		   prev *sudog
+		   elem unsafe.Pointer //data element
+		   ...
+		}
+
+12. What is Unsafe pointer in Golang
+		An unsafe pointer can be used to share data between different data types or to manipulate data at the byte level, providing the ability to optimize certain kinds of operations
+
+13. What are the Risks of Unsafe Pointers?
+		The Go 1 compatibility promise, which guarantees that Go code will continue to compile and work with future Go 1.x versions
+
+
+14. What is Context in Golang?
+		// A Context carries a deadline, a cancellation signal, and other values across
+		// API boundaries.
+		//
+		// Context's methods may be called by multiple goroutines simultaneously.
+
+15. How do you swap two values? Provide a few examples.
+	a, b, c = b, c, a
+
+16. How do you copy a slice, a map, and an interface?
+	You can compare two structs with the == operator, as you would do with other simple types. Just make sure they do not contain any slices, maps, or functions, in which case the code will not be compiled. // reflect.DeepEqual(a, b) 
+	// You can edit this code!
+	
+	Snippet:: // Output: runtime error: comparing uncomparable type []int
+	
+		// Click here and start typing.
+		package main
+
+		import "fmt"
+
+		type Foo struct {
+			Id    int
+			Name  string
+			Value []int
+		}
+
+		func main() {
+
+			a,b := Foo{Id: 1, Name: "R"}
+			fmt.Println(a == b)
+		}
+
+17. What is wrong with the following code snippet?
+
+	Snippet:: //  the String() method that implements the fmt.Stringer() interface will not be invoked when the object orange is being printed with fmt.Println() function, because the method String() is not being defined on a value but only on a pointer:
+	
+		type Orange struct {
+			Quantity int
+		}
+
+		func (o *Orange) Increase(n int) {
+			o.Quantity += n
+		}
+
+		func (o *Orange) Decrease(n int) {
+			o.Quantity -= n
+		}
+
+		func (o *Orange) String() string {
+			return fmt.Sprintf("Available stock: %v", o.Quantity)
+		}
+
+		func main() {
+			var orange Orange
+			orange.Increase(10)
+			orange.Decrease(5)
+			fmt.Println(orange)
+		}
+
+18. What would you do if you need a hash displayed in a fixed order?
+	
+	Snippet:: 
+		fruits := map[string]int{
+			"oranges": 100,
+			"apples":  200,
+			"bananas": 300,
+		}
+		// Output:
+		// apples:200
+		// bananas:300
+		// oranges:100
+
+19. What is the difference, if any, in the following two slice declarations, and which one is more preferable?
+
+	Snippet:: 
+		var a []int
+		// and 
+		a := []int{}
+		
+20. Do we need both GOPATH and GOROOT variables, and why?
+
+21. Why would you prefer to use an empty struct{}? Provide some examples of the good use of the empty struct{}.
+	
+	- You would use an empty struct when you would want to save some memory. Empty structs do not take any memory for its value.
+		a := struct{}{}
+		println(unsafe.Sizeof(a))
+		// Output: 0
+	
+	- When implementing a data set:
+		set := make(map[string]struct{})
+		for _, value := range []string{"apple", "orange", "apple"} {
+		   set[value] = struct{}{}
+		}
+		fmt.Println(set)
+		// Output: map[orange:{} apple:{}]
+		With the seen hash, like when traversing a graph:
+		seen := make(map[string]struct{})
+		for _, ok := seen[v]; !ok {
+			// First time visiting a vertex.
+			seen[v] = struct{}{}
+		}
+	- When building an object, and only being interested in a grouping of methods and no intermediary data, or when you do not plan to retain the object state. In the example below it does not make a difference whether the method is called on the same (case #1) or on two different objects (case #2):
+type Lamp struct{}
+
+		func (l Lamp) On() {
+				println("On")
+
+		}
+		func (l Lamp) Off() {
+				println("Off")
+		}
+
+		func main() {
+				// Case #1.
+				var lamp Lamp
+				lamp.On()
+				lamp.Off()
+				// Output:
+				// on
+				// off
+			
+				// Case #2.
+				Lamp{}.On()
+				Lamp{}.Off()
+				// Output: 
+				// on
+				// off
+		}
+	- When you need a channel to signal an event, but do not really need to send any data. This event is also not the last one in the sequence, in which case you would use the close(ch) built-in function.
+		func worker(ch chan struct{}) {
+			// Receive a message from the main program.
+			<-ch
+			println("roger")
+			
+			// Send a message to the main program.
+			close(ch)
+		}
+
+		func main() {
+			ch := make(chan struct{})
+			go worker(ch)
+			
+			// Send a message to a worker.
+			ch <- struct{}{}
+			
+			// Receive a message from the worker.
+			<-ch
+			println(“roger")
+			// Output:
+			// roger
+			// roger
+		}
+		
+22.  Zero Values: What is the zero value for an integer, a float, a boolean, a string, and a pointer in Go? Why does Go have zero values?
+		Integer: 0
+		Float: 0.0
+		Boolean: false
+		String: "" (empty string)
+		Pointer: nil
+
+23. Pointers and Values: What is the difference between passing a value to a function and passing a pointer to a function in Go? Can you give an example where one would be preferred over the other?
+		In Go, when you pass a value to a function, the function receives a copy of the value. Any changes the function makes to the value do not affect the original value in the calling function. This is called "pass by value".
+
+		On the other hand, when you pass a pointer to a function, the function receives a reference to the original value. Any changes the function makes to the value do affect the original value in the calling function. This is called "pass by reference".
+
+24. Goroutines: What is a goroutine in Go? How does it differ from a thread? What happens when a goroutine leaks?
+	Goroutines are multiplexed onto multiple OS threads so if one should block, such as while waiting for I/O, others continue to run. 
+	They are cheaper than threads in terms of memory usage and startup time, which allows a Go application to create thousands or even millions of goroutines at the same time.
+	The main differences between goroutines and threads are:
+		- Goroutines are managed by the Go runtime, not directly by the operating system. This allows the Go runtime to handle scheduling and context switching, which can be more efficient than OS-level threads.
+		- Goroutines have a smaller stack size that grows and shrinks as needed, while threads usually have a fixed stack size. This makes goroutines more memory-efficient, especially when you have a large number of them.
+	A goroutine leak happens when you start a goroutine that never finishes. This can happen, for example, if the goroutine is waiting for an event that never occurs, or if it enters an infinite loop. Leaked goroutines consume resources and can eventually cause your program to run out of memory. It's similar to a memory leak, but with goroutines instead of memory. 
+	To prevent goroutine leaks, make sure every goroutine has a way to finish, and use synchronization primitives like channels or the sync package to coordinate between goroutines.
+	
+	
+25. Interface Values: If you have a variable of interface type, what happens when you call a method on it and the underlying value is nil?
+	In Go, if you have a variable of interface type and the underlying value is nil, calling a method on it will not result in a nil pointer dereference panic, as long as the method is defined to handle a nil receiver. This is because the method is called with a nil receiver, not on nil itself.
+	
+	Snippet:: 
+		package main
+
+		import "fmt"
+
+		type MyInterface interface {
+			DoSomething()
+		}
+
+		type MyType struct{}
+
+		func (m *MyType) DoSomething() {
+			fmt.Printf("MyType = %v", m)
+		}
+
+		func main() {
+			var m *MyType
+			var i MyInterface = m
+			i.DoSomething()
+		}
+		
+26. Maps: What will happen if you try to read a key from a map that doesn't exist? And what will happen if you try to write to a nil map?
+	In Go, if you try to read a key from a map that doesn't exist, you get the zero value for the map's value type. For instance, if the map's value type is int, you get 0. If it's a pointer type, you get nil. You also get a second return value that indicates whether the key was present in the map.
+	
+	If you try to write to a nil map, however, you get a runtime panic. This is because a nil map has no underlying data structure to hold keys and values.
+	var arr [5]int // an array of 5 integers
+	
+	
+27. Slices: What's the difference between a slice and an array in Go? What happens when you append to a slice and it exceeds its capacity?
+	In Go, an array is a fixed-length sequence of items of the same type. Once an array is created, its size cannot be changed. 
+	
+	A slice, on the other hand, is a flexible-length sequence of array elements. A slice is a reference to an underlying array, and as such, it can be resized.
+	var s []int // a slice of integers
+	
+	When you append to a slice and it exceeds its capacity, Go automatically allocates a new, larger array, copies the existing elements to the new array, and updates the slice to refer to the new array.
+	This operation can be expensive, so if you know in advance that you'll be adding a lot of elements, it can be more efficient to create the slice with a larger initial capacity using the make function.
+	s := make([]int, 0, 100) // a slice of integers with capacity 100
+	
+	Note that the length of a slice (the number of elements it contains) and its capacity (the number of elements in the underlying array) are not always the same. You can use the len function to get the length of a slice and the cap function to get its capacity.
+	
+	Snippet::
+	
+		func main() {
+			s := make([]int, 3, 5)
+			fmt.Println("Length:", len(s))
+			fmt.Println("Capacity:", cap(s))
+			s = append(s, 1, 2)
+			fmt.Println("Length after append:", len(s))
+			fmt.Println("Capacity after append:", cap(s))
+			s = append(s, 3)
+			fmt.Println("Length after second append:", len(s))
+			fmt.Println("Capacity after second append:", cap(s))
+		}
+		
+28. What is the ouput of below code?
+	Snippet::
+		package main
+
+		import "fmt"
+
+		func modifySlice(s []int) {
+			s[0] = 100
+		}
+
+		func main() {
+			s := []int{1, 2, 3}
+			modifySlice(s)
+			fmt.Println(s)
+		}
+
+29. What is ouput of below code? // 
+	Snippet::
+			package main
+
+			import "fmt"
+
+			func modifyMap(m map[string]int) {
+				m["one"] = 100
+			}
+
+			func main() {
+				m := map[string]int{
+					"one": 1,
+					"two": 2,
+				}
+				modifyMap(m)
+				fmt.Println(m)
+			}
+			
+	slices and maps are reference types in Go.	
+
+30. What is the ouput of program and why?
+	Snippet::
+	
+		package main
+
+		import "fmt"
+
+		func main() {
+			ch := make(chan int)
+			ch <- 1
+			ch <- 2
+			fmt.Println(<-ch)
+			fmt.Println(<-ch)
+		}
+	
+31. What's the output of this program and why?
+
+	Snippet::
+	
+		package main
+
+		import "fmt"
+
+		func main() {
+			s := make([]int, 5)
+			s = append(s, 1, 2, 3)
+			fmt.Println(s)
+		}
+32. What's the output of this program and why?
+
+	Snippet::
+		package main
+
+		import "fmt"
+
+		func main() {
+			defer fmt.Println("1")
+			defer fmt.Println("2")
+			fmt.Println("3")
+		}
+
+32. What's the output of this program and why?
+
+	Snippet::
+		package main
+
+		import "fmt"
+
+		func main() {
+			ch := make(chan int)
+			go func() {
+				for i := 0; i < 5; i++ {
+					ch <- i
+				}
+				close(ch)
+			}()
+			for num := range ch {
+				fmt.Println(num)
+			}
+		}
+33. What's the output of this program and why?
+	Snippet::
+		package main
+
+		import (
+			"fmt"
+			"sync"
+		)
+
+		func main() {
+			var wg sync.WaitGroup
+			for i := 0; i < 5; i++ {
+				wg.Add(1)
+				go func(i int) {
+					fmt.Println(i)
+					wg.Done()
+				}(i)
+			}
+			wg.Wait()
+		}
+		
+34. What's the output of this program and why?
+
+	Snippet::
+		package main
+
+		import "fmt"
+		
+		func f1() {
+			fmt.Println("f1")
+		}
+
+		func f2() {
+			fmt.Println("f2")
+		}
+
+		func main() {
+			go f1()
+			go f2()
+			fmt.Println("main")
+		}
+
+
+REST API: write one rest api, and send one request to that api and validate the response.
+
+
+
+What is the difference between the  = and :=?
+
+How to check if a map contains a key in Go?
+
+ANS: if val, ok := dict["foo"];ok{
+}
+
+
+Write a function to find if a given integer x appears more
+than n/2 times in a sorted array of n integers.
+We need to write a function that takes an array (arr[)),
+array's size (n) and a number to be searched (x) as
+parameters and returns true if x is a majority element
+(present more than n/2 times). Print "True" or "False""
+Example:
+Input: [1, 2, 3, 3, 3,3, 101,x=3
+Output: True (x appears more than n/2 times in the given
+array)
+Input: [1, 1, 2,4,4,4,6,61,x =4
+Output: False (x doesn't appear more than n/2 times in
+the given array)
+Input: [1, 1, 1,2,2]x=1
+Output: True (x appears more than n/2 times in the given array)
+Could you do this faster than 0(n)?
+
+
+
+write program to match a given string with a given regular expression 
+with “*”  and “.” in it, where “a*” means zero or more than one occurrence of a, 
+and “.” means single occurrence of any character 
+(Note: “.*” is also a valid expression)
+isMatch("aa", "a")         // Output: false
+isMatch("aa", "a*")        // Output: true
+isMatch("ab", ".*")        // Output: true
+isMatch("mississippi", "mis*is*p*.") // Output: false
+
+
+
+
+
+/**
+ * Rotate an m by m matrix by 90 degrees. whithout using new matrix
+
+i/p:     [
+	 [1, 2, 3, 4],
+     [5, 6, 7, 8],
+     [9, 10, 11, 12],
+     [13, 14, 15, 16]
+	]
+         
+o/p:     [
+	 [13, 9, 5, 1],
+     [14, 10, 6, 2],
+     [15, 11, 7, 3],
+     [16, 12, 8, 4]
+	]
+
+ */
+ 
+ 
+Given an array containing integers, in which the elements are repeated multiple times. 
+Now sort the array wrt the frequency of numbers. 
+
+eg:    i/p: 2, 4, 5, 2, 1, 9, 3, 2, 2, 5, 1, 5
+    o/p: 2, 2, 2, 2, 5, 5, 5, 1, 1, 4, 3, 9
+	
+	
+	
+
+Design a pub sub model in golang.
+For example, We are reciveing realtime data over socket which we want to further sent to Web if any clients are subscribed for topic.
+We have one grid which supports filtering and sorting, 
+for e.g. we have 1000 rows, from those only 50 rows are present.
+there is one details page, where we are showing all information about selected row.
+UI only want recieve updates for visible rows, or if on details page only for that row.
+If multiple users are logged in they can be on grid/home page or details page.
+
+
+we retry to socket connection which is down, on retry we print error statement which we are logging into the file.
+Due to this frequent messages from OS, log file is getting bigger and bigger.
+Write a exponential backoff program which will print statement like below, by which we can reduce logging.
+Start from 1 second delay and till 120 seconds.
+maximum delay = 120 seconds, after that let's start from 1sec again
+
+on 1st second -> fist msg 
+on 2 sec -> 2nd msg
+on 6th sec -> 3rd msg
+on 24th sec -> 4th msg
+on 120th sec -> 5th msg
+
+After 120 start from 1 sec again. 
+
+
+ 
+ :: PUZZLE ::
+ There are 3 ants sitting on three corners of a triangle. All ants randomly pick a direction and start moving along edge of the triangle. What is the probability that any two ants collide?     Hint: Every ant has two choices (pick either of two edges going through the corner on which ant is initially sitting). 
+ 
+ 
+Sol^ : 
+
+Collision doesn’t happen only in following two cases
+	1) All ants move in counterclockwise direction.
+	2) All ants move in clockwise direction.
+
+Since every ant has two choices (pick either of two edges going through the corner on which ant is initially sitting), there are total 23 possibilities. Out of 23 possibilities, only 2 don’t cause collision. So, 
+the probability of collision is 6/8 and 
+the probability of non-collision is 2/8.
+
+
+design goroutines to listen data from socket and publish data on socket.
+suggest the best approach if you want to further publish details to clients.
+We have one grid which supports filtering and sorting, 
+for e.g. we have 1000 rows, from those only 50 rows are present.
+there is one details page, where we are showing all information about selected row.
+UI only want recieve updates for visible rows, or if on details page only for that row.
+If multiple users are logged in they can be on grid/home page or details page.

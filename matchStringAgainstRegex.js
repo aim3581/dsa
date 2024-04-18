@@ -15,7 +15,7 @@ function isMatch(s, p) {
     }
     
     const firstMatch = (s !== "" && (s[0] === p[0] || p[0] === "."));
-    
+    const str = "Rahul";
     if (p.length >= 2 && p[1] === "*") {
         // Either skip the current pattern or skip the first character of the string
         return (isMatch(s, p.substring(2)) || (firstMatch && isMatch(s.substring(1), p)));

@@ -1,11 +1,9 @@
 package main
 
-import (
-	factory "abstract.factory/Factory"
-)
+import factory "abstract.factory/services/Factory"
 
 func main() {
-	c := factory.CreateChair("victorian")
+	c := factory.CreateChair("modern")
 	c.HasLegs()
 	c.SitOn()
 }

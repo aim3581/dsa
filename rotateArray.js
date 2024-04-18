@@ -44,16 +44,34 @@ function rotateCorners(matrix) {
 		temp = temp2;
 	}
 }
+/*
+n = 3 
+i = 0; i< n 
+j = 0; j< 3
 
-function rotateMiddleElements(matrix) {
-	const n = matrix.length - 1;
+i=0;j=0;
+		SWAP: temp = m[0][0] = 1
+			  m[0][0] = m[3][0]= 13
+			  m[3][0] = m[3][3] = 16
+			  m[3][3] = m[0][3] = 4
+			  m[0][3] = temp = 1
+		[
+			[13,	2,	3,	1],
+			[5,		6,	7,	8],
+			[9,		10,	11,	12],
+			[16,	14,	15,	4]
+		]
+*/
+
+function rotateCornerElements(m) {
+	const n = m.length - 1;
 	for (let i = 0; i < n / 2; i++) {
 		for (let j = i; j < n - i; j++) {
-			const temp = matrix[i][j];
-			matrix[i][j] = matrix[n - j][i];
-			matrix[n - j][i] = matrix[n - i][n - j];
-			matrix[n - i][n - j] = matrix[j][n - i];
-			matrix[j][n - i] = temp;
+			const temp = m[i][j];
+			m[i][j] = m[n - j][i];
+			m[n - j][i] = m[n - i][n - j];
+			m[n - i][n - j] = m[j][n - i];
+			m[j][n - i] = temp;
 		}
 	}
 }
@@ -67,5 +85,5 @@ const matrix = [
 
 console.log(matrix);
 
-rotateMiddleElements(matrix);
+rotateCornerElements(matrix);
 console.log(matrix);

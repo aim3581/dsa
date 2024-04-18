@@ -1,0 +1,178 @@
+1. What is the difference between Element and Component?
+
+2. When to use a Class Component over a Function Component?
+	use Class components over Function components.
+	i. If you need a React functionality whose Function component equivalent is not present yet, like Error Boundaries.
+	ii. In older versions, If the component needs state or lifecycle methods then you need to use class component.
+	
+3. What are Pure Components?	
+	prevents unnecessary re-renders by comparing the previous props and new props using shallow comparison. So it will be helpful for performance optimizations.
+
+4. What is the difference between state and props?
+	Unlike props, state can be modified by the component and is used to manage the internal state of the component. Changes in the state trigger a re-render of the component and its children. 
+	props (short for "properties") are passed to a component by its parent component and are read-only. props can be used to configure the behavior of a component and to pass data between components
+	
+5. What is the purpose of callback function as an argument of setState()?
+
+6. Why do we need to bind methods or event handlers in JSX callbacks?
+	Note: If the callback is passed as prop to child components is performant or use .bind() approach, those components might do an extra re-rendering. In those cases, it is preferred to go with .bind() or public class fields syntax approach considering performance.
+
+7. Callback passed as prop to child components or .bind() from parent which one is more performant?
+
+8. 
+ Snippet::
+ 
+ const props = {style:{},a:"",b:""}
+ 
+ const { style, ...rest } = props;
+ 
+ 
+ const [counter, setCounter] = useState(0)
+ write custom hook, which will return counter increment and decrement
+ 
+ 9. In which situation would you use useMemo() in React?
+ 
+ 10. What is the React Virtual DOM?
+		Virtual DOM is a concept where a virtual representation of the real DOM is kept inside the memory and is synced with the actual DOM by a library such as ReactDOM.
+
+		The virtual DOM is an object that represents the real DOM in the memory. Since DOM updates are an integral part of any web app but are the costliest operation in the world of frontend, the virtual DOM is utilized to check for parts of the app that need to be updated & update only those parts, thus significantly boosting performance
+		
+11. What is prop drilling and how to avoid it?
+	Sometimes while developing React applications, there is a need to pass data from a component that is higher in the hierarchy to a component that is deeply nested. To pass data between such components, we pass props from a source component and keep passing the prop to the next component in the hierarchy till we reach the deeply nested component.
+
+	The disadvantage of using prop drilling is that the components that should otherwise be not aware of the data have access to the data, moreover, the code becomes harder to maintain.
+
+	Prop drilling can be avoided using the Context API or some form of State Management library.
+	
+12. Why is it not advisable to update state directly, but use the setState call?
+	The conventional way to update state is to use the setState call. Without using it, the user would still be able to modify the state, but it would not update the DOM to reflect the new state.
+	
+	const Component = () => {
+	  const [count, setCount] = useState(0);
+
+	  const handleClickUpdate = () => {
+		setCount((c) => c + 1);
+	  };
+
+	  return (
+		<>
+		  {count}
+		  <button onClick={handleClickUpdate}>Click me</button>
+		</>
+	  );
+	};
+
+13. What's the output of this component and why?
+
+		
+	/**
+	* The output of this component will be 0 and it will not increment. This is because the useEffect hook has an empty dependency array, meaning it only runs once after the initial render. At that time, count is 0, so the setTimeout callback captures count as 0 and increments it to 1 after 1 second. However, since useEffect doesn't run again, count doesn't increment further.
+	*/
+
+	Snippet::
+		import React, { useState, useEffect } from 'react';
+
+		function App() {
+		  const [count, setCount] = useState(0);
+
+		  useEffect(() => {
+			setTimeout(() => {
+			  setCount(count + 1);
+			}, 1000);
+		  }, []);
+
+		  return <div>{count}</div>;
+		}
+
+		export default App;
+	
+		
+14. What's the output of this component and why?
+	/**
+	* The output of this component will be 1, not 3 as one might expect. This is because setState updates in React are batched for performance reasons. When multiple setState calls are made in a row, React batches them into a single update. Since this.state.count is 0 at the time of each setState call, each call increments 0 to 1.
+	*/
+	
+	Snippet::
+		import React from 'react';
+
+		class App extends React.Component {
+		  constructor(props) {
+			super(props);
+			this.state = { count: 0 };
+		  }
+
+		  componentDidMount() {
+			this.setState({ count: this.state.count + 1 });
+			this.setState({ count: this.state.count + 1 });
+			this.setState({ count: this.state.count + 1 });
+		  }
+
+		  render() {
+			return <div>{this.state.count}</div>;
+		  }
+		}
+
+		export default App;
+		
+15. What's the output of this component and why?
+	/**
+	*When the "Increment" button is clicked, the count will increment, but the text will disappear. This is because useState does not automatically merge and update the state object like this.setState does in class components. Instead, it replaces the old state with the new one. So when setState is called with the new count, it doesn't include the text property, causing it to disappear.
+	*/
+	
+	Snippet::
+		import React, { useState } from 'react';
+
+		function App() {
+		  const [state, setState] = useState({ count: 0, text: 'hello' });
+
+		  const increment = () => {
+			setState({ count: state.count + 1 });
+		  };
+
+		  return (
+			<div>
+			  <div>{state.count}</div>
+			  <div>{state.text}</div>
+			  <button onClick={increment}>Increment</button>
+			</div>
+		  );
+		}
+
+		export default App;
+		
+16. What's the output of this component and why?
+	/**
+	* The output of this component will be "Render count: 1" and it will not increment on subsequent renders. This is because renderCount.current is incremented inside the render method, but the component does not re-render because its state and props do not change.
+	*/
+	
+	Snippet::
+		import React from 'react';
+
+		function App() {
+		  const renderCount = React.useRef(0);
+
+		  return <div>Render count: {++renderCount.current}</div>;
+		}
+
+		export default App;
+		
+17. What's the output of this component and why?
+	
+	Snippet::
+		import React, { useState, useEffect } from 'react';
+
+		function App() {
+		  const [count, setCount] = useState(0);
+
+		  useEffect(() => {
+			const id = setInterval(() => {
+			  setCount(count + 1);
+			}, 1000);
+			return () => clearInterval(id);
+		  }, []);
+
+		  return <div>{count}</div>;
+		}
+
+		export default App;
+		
