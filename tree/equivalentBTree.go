@@ -27,14 +27,14 @@ import (
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.
 func WalkInorderStack(t *Tree, ch chan int) {
-	s := make([]*Tree, 0)
+	stk := stack.New[*Tree]()
 	current := t
-	for current != nil || len(s) > 0 {
+	for current != nil || len(stk) > 0 {
 		for current != nil {
-			stack.Push(s, current)
+			stk.Push(current)
 			current = current.Left
 		}
-		current = stack.Pop(s)
+		current = stk.Pop()
 		ch <- current.Value
 		current = current.Right
 	}
