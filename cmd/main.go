@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	mstring "github.com/aim3581/dsa/mString"
 )
 
@@ -15,6 +17,12 @@ func main() {
 	// fmt.Println(t1)
 	// fmt.Println(t2)
 	// fmt.Println(tree.Same(t1, t2))
-	str := "abcabcde"
-	mstring.String(str)
+	strs := []string{"bpfbhmipx", "bbbbbbbb", "abcabccb", "pwwkew"}
+	expecteds := []int{7, 1, 3, 3}
+	for i := 0; i < len(strs); i++ {
+		str := strs[i]
+		n := mstring.UsingMap(str)
+		fmt.Println(str, n, n == expecteds[i])
+	}
+
 }
