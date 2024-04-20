@@ -8,6 +8,83 @@ class Node {
     }
 }
 
+/**
+	 * Binary Tree
+		• A binary tree is a tree with the following properties:
+			• Each internal node has two children
+			• The children of a node are an ordered pair
+			• We call the children of an internal node left child and right child
+			• Alternative recursive definition: a binary tree is either
+				• a tree consisting of a single node, or
+				• a tree whose root has an ordered pair of children, each of which is a disjoint binary tree
+		• Applications:
+			• arithmetic expressions
+			• decision processes
+			• searching
+		The tree data structure
+
+		
+         10
+       /  \
+      8   14
+     / \  /  \
+    7  9 12  17
+          /  /  \
+         11 16  15
+            \
+            13
+
+In-order (left, root, right): 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+Pre-order (root, left, right): 10, 8, 7, 9, 14, 12, 11, 13, 17, 16, 15
+Post-order (left, right, root): 7, 9, 8, 11, 13, 12, 15, 16, 17, 14, 10
+Level-order (Breadth-first): 10, 8, 14, 7, 9, 12, 17, 11, 16, 13, 15
+
+	?? 	How many leaves L does a proper binary tree of heighh have?
+		The number of leaves at depth d = 2d
+		If the height of the tree is h it has 2^h leaves.
+		L = 2^h
+
+	?? What is the height h of a proper binary tree with L leaves?
+		leaves = 1 height = 0
+		leaves = 2 height = 1
+		leaves = 4 height = 2
+		leaves = L height = LogL
+		Since L = 2^h
+		logL = log2^h
+		h = logL
+	
+	??	The number of internal nodes of a proper binary tree of height h is ?
+			Internal nodes = 0 height = 0
+			Internal nodes = 1 height = 1
+			Internal nodes = 1 + 2 height = 2
+			Internal nodes = 1 + 2 + 4 height = 3
+			1 + 2 + 2^2 + . . . + 2^(h-1) = 2^h - 1
+			Thus, a complete binary tree of height = h has 2^h - 1 internal nodes.
+
+	?? The number of nodes n of a proper binary tree of height h is ?
+
+		nodes = 1 height = 0
+		nodes = 3 height = 1
+		nodes = 7 height = 2
+		nodes = 2^(h+1)- 1 height = h
+		Since L = 2^h
+		and since the number of internal nodes = 2^h - 1 
+		the total number of nodes n = 2^h+ 2^h - 1 = 2(2^h) – 1 = 2^(h+1) - 1
+
+	?? If the number of nodes is n then what is the height?
+		nodes = 1 height = 0
+		nodes = 3 height = 1
+		nodes = 7 height = 2
+		nodes = n height = Log(n+1) - 1
+		
+		Since n = 2h+1-1
+		n + 1 = 2^h+1
+		Log(n+1) = Log2^(h+1)
+		Log(n+1) = h+1
+		h = Log(n+1) - 1
+
+ */
+
 // BST (Binary Search Tree) class represents the whole tree
 class BST {
     constructor() {
@@ -143,6 +220,15 @@ class BST {
 		this.preOrderDFS(node.right);
 	}
 
+	/**
+	 * Non-Recursive preorder traversal
+		1. Start from root.
+		2. Print the node.
+		3. Push right child onto to stack.
+		4. Push left child onto to stack.
+		5. Pop node from the stack.
+		6. Repeat Step 2 to 5 till stack is not empty.
+	 */
 	// Function to perform a pre-order traversal of the Binary Search Tree using a stack
 	preOrderStack(root) {
 		// Initialize an empty stack
@@ -344,6 +430,40 @@ class BST {
 		return widths;
 	}
 
+	levelOrderBFSWithoutWidths() {
+		// Initialize an empty queue
+		const queue = [];
+	
+		// If the root is null (i.e., the tree is empty), return
+		if (this.root == null) return;
+	
+		// Push the root node to the queue
+		queue.push(this.root);
+	
+		// Continue the loop as long as there are unvisited nodes
+		while (queue.length !== 0) {
+			// Initialize count to keep track of the number of nodes at the current level
+			let count = queue.length;
+	
+			// Iterate over each node at the current level
+			for (let i = 0; i < count; i++) {
+				// Remove a node from the front of the queue and print its value
+				const node = queue.shift();
+				console.log(node.key);
+	
+				// If the current node has a left child, add it to the end of the queue
+				if (node.left !== null) {
+					queue.push(node.left);
+				}
+	
+				// If the current node has a right child, add it to the end of the queue
+				if (node.right !== null) {
+					queue.push(node.right);
+				}
+			}
+		}
+	}	
+
 	/**
 	 * This function uses a post-order Depth-First Search (DFS) traversal to find the Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST). 
 	 * The LCA is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself). 
@@ -426,6 +546,15 @@ class BST {
 	 * This function uses a recursive approach to calculate the height of a node in a Binary Search Tree (BST). 
 	 * The height of a node is defined as the number of edges on the longest path from the node to a leaf. 
 	 * An empty tree has a height of 0.
+	 * 
+	 * Computing Height of Tree
+		Can be computed using the following idea:
+		1. The height of a leaf node is 0
+		2. The height of a node other than the leaf is the
+		maximum of the height of the left subtree and the
+		height of the right subtree plus 1.
+		-------  Height(v) = max[height(vleft) + height(vright)] + 1 -------
+	 * 
 	 */
 	// Function to calculate the height of a node in the Binary Search Tree
 	height(node) {
@@ -511,6 +640,23 @@ class BST {
 	}
 }
 
+/**
+ * 
+         10
+       /  \
+      8   14
+     / \  /  \
+    7  9 12  17
+          /  /  \
+         11 16  15
+            \
+            13
+
+In-order (left, root, right): 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+Pre-order (root, left, right): 10, 8, 7, 9, 14, 12, 11, 13, 17, 16, 15
+Post-order (left, right, root): 7, 9, 8, 11, 13, 12, 15, 16, 17, 14, 10
+Level-order (Breadth-first): 10, 8, 14, 7, 9, 12, 17, 11, 16, 13, 15			
+ */
 const tree = new BST();
 
 tree.insert(10);
@@ -554,3 +700,4 @@ console.log("----------------------------------------");
 tree.postOrderStack(tree.root)
 
 exports.BST=BST;
+
