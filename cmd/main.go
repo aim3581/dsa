@@ -8,22 +8,23 @@ import (
 	linkedList "github.com/aim3581/dsa/linked-list"
 	mstring "github.com/aim3581/dsa/mString"
 	"github.com/aim3581/dsa/slidingwindow"
-	// "github.com/aim3581/dsa/tree"
+	"github.com/aim3581/dsa/tree"
 )
 
 func main() {
 	//testReverLinkedList()
 	// testLongestSubString()
 	// testFindSubString()
-	testPermutations()
+	testEquivalentTree()
+	// testPermutations()
 }
 
 func testEquivalentTree() {
-	// t1 := tree.New(10)
-	// t2 := tree.New(5)
-	// fmt.Println(t1)
-	// fmt.Println(t2)
-	// fmt.Println(tree.Same(t1, t2))
+	t1 := tree.New(5)
+	t2 := tree.New(5)
+	fmt.Println(t1)
+	fmt.Println(t2)
+	fmt.Println(tree.Same(t1, t2))
 }
 func testReverLinkedList() {
 	head := &linkedList.ListNode{}

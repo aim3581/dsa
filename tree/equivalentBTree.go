@@ -20,12 +20,14 @@ Then read and print 10 values from the channel. It should be the numbers 1, 2, 3
 Same(tree.New(1), tree.New(1)) should return true, and Same(tree.New(1), tree.New(2)) should return false.
 */
 
-import "github.com/aim3581/dsa/stack"
+import (
+	"github.com/aim3581/dsa/ds"
+)
 
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.
 func WalkInorderStack(t *Tree, ch chan int) {
-	stk := stack.New[*Tree]()
+	stk := ds.Stack[*Tree]{}
 	current := t
 	for current != nil || len(stk) > 0 {
 		for current != nil {
