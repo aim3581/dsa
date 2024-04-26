@@ -20,9 +20,7 @@ Then read and print 10 values from the channel. It should be the numbers 1, 2, 3
 Same(tree.New(1), tree.New(1)) should return true, and Same(tree.New(1), tree.New(2)) should return false.
 */
 
-import (
-	stack "github.com/aim3581/dsa/stack"
-)
+import "github.com/aim3581/dsa/stack"
 
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.

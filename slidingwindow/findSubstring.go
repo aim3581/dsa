@@ -1,13 +1,14 @@
-package main
-import(
+package slidingwindow
+
+import (
 	"fmt"
 	"slices"
 )
 
-func findSubstring(s string, words []string) []int {
-	if len(words) == 0 || len(s) ==0 {
-        return []int{}
-    }
+func FindSubstring(s string, words []string) []int {
+	if len(words) == 0 || len(s) == 0 {
+		return []int{}
+	}
 	wsize := len(words[0])
 	q := []int{}
 	result := []int{}
