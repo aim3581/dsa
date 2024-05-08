@@ -15,8 +15,9 @@ func main() {
 	//testReverLinkedList()
 	// testLongestSubString()
 	// testFindSubString()
-	testEquivalentTree()
+	//testEquivalentTree()
 	// testPermutations()
+	testSubsets()
 }
 
 func testEquivalentTree() {
@@ -88,4 +89,9 @@ func testPermutations() {
 	// Generate and print the permutations of the input slice.
 	result := backtracking.Permute(nums)
 	fmt.Println(result)
+}
+
+func testSubsets(){
+	nums := []int{1,2,3}
+	fmt.Println(backtracking.Subsets(nums))
 }
