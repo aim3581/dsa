@@ -9,6 +9,7 @@ import (
 	mstring "github.com/aim3581/dsa/mString"
 	"github.com/aim3581/dsa/slidingwindow"
 	"github.com/aim3581/dsa/tree"
+	"github.com/aim3581/dsa/graph"
 )
 
 func main() {
@@ -17,7 +18,8 @@ func main() {
 	// testFindSubString()
 	//testEquivalentTree()
 	// testPermutations()
-	testSubsets()
+	//testSubsets()
+	graph.TestData()
 }
 
 func testEquivalentTree() {
