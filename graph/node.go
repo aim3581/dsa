@@ -1,3 +1,7 @@
+package graph
+
+import "fmt"
+
 type Node struct{
 	Value int
 	Edges []*Node
@@ -23,7 +27,7 @@ func (n *Node) BFS(){
 	}
 }
 
-funt TestData(){
+func TestData(){
 	n := &Node{Value:1}
 	n.BFS()
 }
